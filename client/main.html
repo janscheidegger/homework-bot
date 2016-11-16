@@ -33,9 +33,11 @@
         {{> myClass}}
     {{/each}}
     </ul>
+
+  <button class="js-sendMessage">Send Hello world</button>
 </template>
 
- 
+
 <template name="myClass">
   <li><a href="/my-classes/{{_id}}">{{className}}</a><a href="#" class="remove">remove</a></li>
 </template>
@@ -53,3 +55,4 @@
   </form>
 {{/if}}
 </template>
+
