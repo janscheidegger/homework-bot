@@ -35,6 +35,12 @@ Template.currentClass.helpers({
   }
 })
 
+Template.myClass.events({
+  'click .remove'(event) {
+        Classes.remove(this._id);
+  }
+})
+
 Template.currentClass.events({
   'submit .add-chat'(event) {
     event.preventDefault();

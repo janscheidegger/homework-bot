@@ -37,7 +37,7 @@
 
  
 <template name="myClass">
-  <li><a href="/my-classes/{{_id}}">{{className}}</a></li>
+  <li><a href="/my-classes/{{_id}}">{{className}}</a><a href="#" class="remove">remove</a></li>
 </template>
 
 <template name="currentClass">
@@ -45,10 +45,11 @@
 
 {{#if myClass.chat}}
   <p>Bot is active at: {{myClass.chat}}</p>
-{{/if}}
+{{else}}
 
   Register Chatroom
   <form class="add-chat">
     <input type="text" name="chatname" placeholder="Enter your chatname" />
   </form>
+{{/if}}
 </template>
