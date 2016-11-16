@@ -3,23 +3,52 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/my-classes">My Classes</a></li>
+    </ul>
+  </nav>
+  <main>
+  {{> main}}
+  </main>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="main">
+
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="hello">
+  <h1>This is the Bot for every sad teacher to remember the students. Just add this bot to your Class Chat.</h1>
+  <p>You can add this bot as follows to your Class Chat on telegram</p>
+</template>
+
+
+<template name="classes">
+  <form class="new-class">
+        <input type="text" name="classname" placeholder="Enter your Class Id" />
+    </form>
+    <ul>
+    {{#each classes}}
+        {{> myClass}}
+    {{/each}}
+    </ul>
+</template>
+
+ 
+<template name="myClass">
+  <li><a href="/my-classes/{{_id}}">{{className}}</a></li>
+</template>
+
+<template name="currentClass">
+  <h2>Hello to {{myClass.className}}</h2>
+
+{{#if myClass.chat}}
+  <p>Bot is active at: {{myClass.chat}}</p>
+{{/if}}
+
+  Register Chatroom
+  <form class="add-chat">
+    <input type="text" name="chatname" placeholder="Enter your chatname" />
+  </form>
 </template>
