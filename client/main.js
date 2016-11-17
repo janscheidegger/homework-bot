@@ -8,7 +8,12 @@ import './main.html';
 Template.hello.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
-  setInterval();
+
+  this.poll = () => HTTP.get("https://api.telegram.org/bot286533420:AAGOTzFbQ4amPaSwe6nJlYu08EuvnrKd-UI/getUpdates", [], function(result) {
+        console.log(result);
+      });
+
+  setInterval(this.poll, 5000);
 });
 
 Template.hello.helpers({
@@ -16,25 +21,13 @@ Template.hello.helpers({
     return Template.instance().counter.get();
   },
 
-  setInterval(function () {
-    HTTP.get("https://api.telegram.org/bot286533420:AAGOTzFbQ4amPaSwe6nJlYu08EuvnrKd-UI/getUpdates", [], function(result) {
-      console.log(result);
-    });
-  }, 1000)
+
 });
 
 Template.hello.events({
   'click button'(event, instance) {
     // increment the counter when button is clicked
     instance.counter.set(instance.counter.get() + 1);
-  },
-
-  'click .js-sendMessage'(event) {
-    HTTP.call("POST", "https://api.telegram.org/bot286533420:AAGOTzFbQ4amPaSwe6nJlYu08EuvnrKd-UI/sendMessage",
-          {data: {text: "Hello World", chat_id: -168485478}},
-          function (error, result) {
-            console.log(result);
-          });
   },
 
 });
@@ -59,6 +52,7 @@ Template.myClass.events({
 })
 
 Template.currentClass.events({
+
   'submit .add-chat'(event) {
     event.preventDefault();
 
@@ -97,6 +91,14 @@ Template.currentClass.events({
 })
 
 Template.classes.events({
+  'click .js-sendMessage'(event) {
+    HTTP.call("POST", "https://api.telegram.org/bot286533420:AAGOTzFbQ4amPaSwe6nJlYu08EuvnrKd-UI/sendMessage",
+          {data: {text: "Hello World", chat_id: -168485478}},
+          function (error, result) {
+            console.log(result);
+          });
+  },
+
   'submit .new-class'(event) {
     event.preventDefault();
 
