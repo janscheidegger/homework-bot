@@ -73,6 +73,26 @@ Template.currentClass.events({
     });
 
     target.chatname.value = '';
+  },
+  'submit .add-homework'(event) {
+    event.preventDefault();
+
+    const classId = FlowRouter.getParam("classId");
+
+
+    const target = event.target;
+
+    const homeworkTaks = { 
+      subject: target.subject.value,
+      dueDate: target.duedate.value,
+      description: target.description.value
+    };
+
+    Classes.upsert(classId,{ $push: { homework: homeworkTaks }});
+
+    target.subject.value = '';
+    target.duedate.value = '';
+    target.description.value = '';
   }
 })
 
@@ -89,6 +109,6 @@ Template.classes.events({
     });
 
      target.classname.value = '';
-  },
+  }
 });
 
